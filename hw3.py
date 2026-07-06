@@ -56,45 +56,75 @@ import numpy as np
 
 print("-" * 70)
 # exercise 2
-recipes = np.array([
-    [15, 350, 2, 5],
-    [45, 600, 7, 10],
-    [10, 200, 0, 3],
-    [30, 450, 5, 7],
-    [60, 800, 8, 12]
-], dtype = float)
+# recipes = np.array([
+#     [15, 350, 2, 5],
+#     [45, 600, 7, 10],
+#     [10, 200, 0, 3],
+#     [30, 450, 5, 7],
+#     [60, 800, 8, 12]
+# ], dtype = float)
 
 recipe_names = ["Salad", "Curry", "Toast", "Pasta", "Stew"]
 # c0 = cook time, c1 = colorie, c2 = spiciness, c3 = ingridients number
 
-max_recepies = (np.max(recipes, axis = 0)).reshape(1,4)
-min_recepies = (np.min(recipes, axis = 0)).reshape(1,4)
-print(max_recepies)
-print(min_recepies)
-normalized_recepies = (recipes - min_recepies) / (max_recepies - min_recepies)
-print(normalized_recepies)
+# max_recepies = (np.max(recipes, axis = 0)).reshape(1,4)
+# min_recepies = (np.min(recipes, axis = 0)).reshape(1,4)
+# print(max_recepies)
+# print(min_recepies)
+# normalized_recepies = (recipes - min_recepies) / (max_recepies - min_recepies)
+# print(normalized_recepies)
 
-users = np.array([
-    [10, 250, 1, 4],
-    [50, 700, 8, 11],
-    [25, 400, 4, 6]
-], dtype = float)
-print("=" * 60)
-normalized_users =  (users - min_recepies) / (max_recepies - min_recepies)
-print(normalized_users)
+# users = np.array([
+#     [10, 250, 1, 4],
+#     [50, 700, 8, 11],
+#     [25, 400, 4, 6]
+# ], dtype = float)
+# print("=" * 60)
+# normalized_users =  (users - min_recepies) / (max_recepies - min_recepies)
+# print(normalized_users)
 
-distances = np.linalg.norm(normalized_users[:,None, :] - normalized_recepies[None, :, :], axis = 2)
-print(distances.shape)
-print(distances)
+# distances = np.linalg.norm(normalized_users[:,None, :] - normalized_recepies[None, :, :], axis = 2)
+# print(distances.shape)
+# print(distances)
 
-user_preference = np.argmin(distances, axis=1)
+# user_preference = np.argmin(distances, axis=1)
 
-for i in range(len(user_preference)):
-    print(f"User {i + 1} probably enjoys mostly: {recipe_names[user_preference[i]]}")
+# for i in range(len(user_preference)):
+#     print(f"User {i + 1} probably enjoys mostly: {recipe_names[user_preference[i]]}")
 
-recipe_names = np.array(recipe_names)
-print(recipe_names[user_preference])
+# recipe_names = np.array(recipe_names)
+# print(recipe_names[user_preference])
 
-sorted_indecies = np.argsort(distances, axis = 1)
-sorted_preferences = recipe_names[sorted_indecies]
-print(sorted_preferences)
+# sorted_indecies = np.argsort(distances, axis = 1)
+# sorted_preferences = recipe_names[sorted_indecies]
+# print(sorted_preferences)
+
+# exercise 3
+# col0 = quiz, col1 = midterm , col2 = final
+scores = np.array([
+    [18, 15, 20],
+    [12, 14, 16],
+    [20, 19, 18],
+    [10,  8, 15]
+])
+# 3 ways of weighting
+scheme_A = np.array([0.5, 0.3, 0.2])
+scheme_B = np.array([0.2, 0.3, 0.5])
+scheme_C = np.array([0.1, 0.2, 0.7])
+
+weights = np.concatenate((scheme_A, scheme_B, scheme_C), axis = 0).reshape(3, 3)
+print(weights, weights.shape)
+final_score = scores @ weights.T
+print (final_score)
+print(final_score.shape)
+
+methods = np.array(["A", "B", "C"])
+max_scoring_method = np.argmax(final_score, axis = 1)
+print(f"the method of weighting for each student is equal to {methods[max_scoring_method]} respectively")
+
+manager_method = methods[np.argmax(np.mean(final_score, axis = 0))]
+print(f"manager method of weighting that can max students score is {manager_method}")
+# q + m + 2q = 1 >>> 3q + m = 1 >>> assue --> q = 0.225, m = 0.325 , f = 0.45
+new_weight = np.array([0.225, 0.325, 0.45]).reshape(1, 3)
+weights = np.concatenate((weights, new_weight), axis = 0)
+print(f"new weight matrix is {weights} and its shape is {weights.shape}")
