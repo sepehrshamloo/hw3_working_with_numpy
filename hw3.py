@@ -101,30 +101,65 @@ recipe_names = ["Salad", "Curry", "Toast", "Pasta", "Stew"]
 
 # exercise 3
 # col0 = quiz, col1 = midterm , col2 = final
-scores = np.array([
-    [18, 15, 20],
-    [12, 14, 16],
-    [20, 19, 18],
-    [10,  8, 15]
-])
-# 3 ways of weighting
-scheme_A = np.array([0.5, 0.3, 0.2])
-scheme_B = np.array([0.2, 0.3, 0.5])
-scheme_C = np.array([0.1, 0.2, 0.7])
+# scores = np.array([
+#     [18, 15, 20],
+#     [12, 14, 16],
+#     [20, 19, 18],
+#     [10,  8, 15]
+# ])
+# # 3 ways of weighting
+# scheme_A = np.array([0.5, 0.3, 0.2])
+# scheme_B = np.array([0.2, 0.3, 0.5])
+# scheme_C = np.array([0.1, 0.2, 0.7])
 
-weights = np.concatenate((scheme_A, scheme_B, scheme_C), axis = 0).reshape(3, 3)
-print(weights, weights.shape)
-final_score = scores @ weights.T
-print (final_score)
-print(final_score.shape)
+# weights = np.concatenate((scheme_A, scheme_B, scheme_C), axis = 0).reshape(3, 3)
+# print(weights, weights.shape)
+# final_score = scores @ weights.T
+# print (final_score)
+# print(final_score.shape)
 
-methods = np.array(["A", "B", "C"])
-max_scoring_method = np.argmax(final_score, axis = 1)
-print(f"the method of weighting for each student is equal to {methods[max_scoring_method]} respectively")
+# methods = np.array(["A", "B", "C"])
+# max_scoring_method = np.argmax(final_score, axis = 1)
+# print(f"the method of weighting for each student is equal to {methods[max_scoring_method]} respectively")
 
-manager_method = methods[np.argmax(np.mean(final_score, axis = 0))]
-print(f"manager method of weighting that can max students score is {manager_method}")
-# q + m + 2q = 1 >>> 3q + m = 1 >>> assue --> q = 0.225, m = 0.325 , f = 0.45
-new_weight = np.array([0.225, 0.325, 0.45]).reshape(1, 3)
-weights = np.concatenate((weights, new_weight), axis = 0)
-print(f"new weight matrix is {weights} and its shape is {weights.shape}")
+# manager_method = methods[np.argmax(np.mean(final_score, axis = 0))]
+# print(f"manager method of weighting that can max students score is {manager_method}")
+# # q + m + 2q = 1 >>> 3q + m = 1 >>> assue --> q = 0.225, m = 0.325 , f = 0.45
+# new_weight = np.array([0.225, 0.325, 0.45]).reshape(1, 3)
+# weights = np.concatenate((weights, new_weight), axis = 0)
+# print(f"new weight matrix is {weights} and its shape is {weights.shape}")
+
+
+# EXERCISE 4
+# a tensor > 2 = days, 8 = number of measurements per day, 4 = sensors
+np.random.seed(42)
+weather_data = np.random.randn(2, 8, 4) * 5 + 20
+day2 = weather_data[1]
+day2 = day2.T
+print(day2)
+def analyze_day(day):
+    return f"The maximum temperature in this day is: {np.max(np.mean(day, axis=0)):.2f}"
+print(analyze_day(day2))
+
+new_weather_data = weather_data.flatten()
+print(new_weather_data, new_weather_data.shape)
+print("===" * 40)
+test_matrix = np.random.randn(2,2) * 10
+transpose_matrix = test_matrix.T
+flatten_matrix = test_matrix.flatten()
+# print(test_matrix)
+# print(transpose_matrix)
+# print(flatten_matrix)
+# print(test_matrix.shape)
+# print(transpose_matrix.shape)
+# print(flatten_matrix.shape)
+# print(np.max(test_matrix, axis = 0))
+# print(np.max(transpose_matrix, axis = 0))
+# print(np.max(flatten_matrix, axis = 0))
+
+day3 = np.random.randn(8, 4)
+print(weather_data)
+print(day3)
+
+weather_data = np.concatenate((weather_data, day3.reshape(1,8,4)), axis = 0)
+print(weather_data)
