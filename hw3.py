@@ -132,34 +132,63 @@ recipe_names = ["Salad", "Curry", "Toast", "Pasta", "Stew"]
 
 # EXERCISE 4
 # a tensor > 2 = days, 8 = number of measurements per day, 4 = sensors
-np.random.seed(42)
-weather_data = np.random.randn(2, 8, 4) * 5 + 20
-day2 = weather_data[1]
-day2 = day2.T
-print(day2)
-def analyze_day(day):
-    return f"The maximum temperature in this day is: {np.max(np.mean(day, axis=0)):.2f}"
-print(analyze_day(day2))
+# np.random.seed(42)
+# weather_data = np.random.randn(2, 8, 4) * 5 + 20
+# day2 = weather_data[1]
+# day2 = day2.T
+# print(day2)
+# def analyze_day(day):
+#     return f"The maximum temperature in this day is: {np.max(np.mean(day, axis=0)):.2f}"
+# print(analyze_day(day2))
 
-new_weather_data = weather_data.flatten()
-print(new_weather_data, new_weather_data.shape)
-print("===" * 40)
-test_matrix = np.random.randn(2,2) * 10
-transpose_matrix = test_matrix.T
-flatten_matrix = test_matrix.flatten()
-# print(test_matrix)
-# print(transpose_matrix)
-# print(flatten_matrix)
-# print(test_matrix.shape)
-# print(transpose_matrix.shape)
-# print(flatten_matrix.shape)
-# print(np.max(test_matrix, axis = 0))
-# print(np.max(transpose_matrix, axis = 0))
-# print(np.max(flatten_matrix, axis = 0))
+# new_weather_data = weather_data.flatten()
+# print(new_weather_data, new_weather_data.shape)
+# print("===" * 40)
+# test_matrix = np.random.randn(2,2) * 10
+# transpose_matrix = test_matrix.T
+# flatten_matrix = test_matrix.flatten()
+# # print(test_matrix)
+# # print(transpose_matrix)
+# # print(flatten_matrix)
+# # print(test_matrix.shape)
+# # print(transpose_matrix.shape)
+# # print(flatten_matrix.shape)
+# # print(np.max(test_matrix, axis = 0))
+# # print(np.max(transpose_matrix, axis = 0))
+# # print(np.max(flatten_matrix, axis = 0))
 
-day3 = np.random.randn(8, 4)
-print(weather_data)
-print(day3)
+# day3 = np.random.randn(8, 4)
+# print(weather_data)
+# print(day3)
 
-weather_data = np.concatenate((weather_data, day3.reshape(1,8,4)), axis = 0)
-print(weather_data)
+# weather_data = np.concatenate((weather_data, day3.reshape(1,8,4)), axis = 0)
+# print(weather_data)
+
+
+# EXERCISE 5
+# importance = np.array([3, 8, 1, 9, 4, 7])
+# print(np.shape(importance))
+# new_importance = importance.reshape(6,1)
+# new_importance2 = (importance[np.newaxis, :]).T
+# print(new_importance, new_importance.shape)
+# print(new_importance2, new_importance2.shape)
+
+# model_out = np.array([[[0.9]]])
+# print(model_out[0][0][0])
+# print(model_out.item(0,0,0))
+
+notes = np.array([5, 10, 15, 20, 25])
+# not affecting
+print(notes)
+# pinned = notes[1:3]
+# pinned[0] = 999
+# print(notes)
+# pinned = notes[1:3].copy()
+# pinned[0] = 999
+# print(notes)
+# print(pinned)
+
+# affecting
+new_subset = notes[1:]
+new_subset[:3] = np.array([20, 30, 40])
+print(notes)
