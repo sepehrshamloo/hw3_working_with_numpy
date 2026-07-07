@@ -132,7 +132,7 @@ recipe_names = ["Salad", "Curry", "Toast", "Pasta", "Stew"]
 
 # EXERCISE 4
 # a tensor > 2 = days, 8 = number of measurements per day, 4 = sensors
-# np.random.seed(42)
+np.random.seed(42)
 # weather_data = np.random.randn(2, 8, 4) * 5 + 20
 # day2 = weather_data[1]
 # day2 = day2.T
@@ -177,18 +177,50 @@ recipe_names = ["Salad", "Curry", "Toast", "Pasta", "Stew"]
 # print(model_out[0][0][0])
 # print(model_out.item(0,0,0))
 
-notes = np.array([5, 10, 15, 20, 25])
-# not affecting
-print(notes)
-# pinned = notes[1:3]
-# pinned[0] = 999
+# notes = np.array([5, 10, 15, 20, 25])
+# # not affecting
 # print(notes)
-# pinned = notes[1:3].copy()
-# pinned[0] = 999
-# print(notes)
-# print(pinned)
+# # pinned = notes[1:3]
+# # pinned[0] = 999
+# # print(notes)
+# # pinned = notes[1:3].copy()
+# # pinned[0] = 999
+# # print(notes)
+# # print(pinned)
 
-# affecting
-new_subset = notes[1:]
-new_subset[:3] = np.array([20, 30, 40])
-print(notes)
+# # affecting
+# new_subset = notes[1:]
+# new_subset[:3] = np.array([20, 30, 40])
+# print(notes)
+
+# EXERCISE 6
+bib_numbers = np.array([101, 102, 103, 104, 105, 106]) 
+times_5k = np.array([22.3, 25.1, 21.8, 26.4, 23.0, 24.7])
+bib_numbers_2 = np.array([107, 108]) 
+times_5k_2 = np.array([20.5, 27.9])
+bib_numbers = np.concatenate((bib_numbers, bib_numbers_2))
+times_5k = np.concatenate((times_5k, times_5k_2))
+# print(bib_numbers)
+# print(times_5k)
+
+suffled_index = np.random.permutation(len(bib_numbers.copy()))
+print(suffled_index)
+
+new_bib_numbers = (bib_numbers[suffled_index]).copy()
+new_times_5k = (times_5k[suffled_index]).copy()
+# print(new_bib_numbers)
+# print(new_times_5k)
+# print(bib_numbers)
+# print(times_5k)
+rankings_index = np.argsort(times_5k.copy())
+print(rankings_index)
+sorted_people = ((bib_numbers.copy())[rankings_index]).reshape(8,1) 
+# from the most quick person to least quick one
+print(sorted_people)
+Ranks = (np.arange(1,len(bib_numbers) + 1)).reshape(8,1)
+My_table = np.concatenate((sorted_people, Ranks), axis = 1)
+print("-" * 50)
+print(My_table)
+# col0 = bib_num, col1 = rank
+bib_104_rank = My_table[My_table[:, 0] == 104][:, 1].item()
+print(f"bib 104 rank :  {bib_104_rank}")
