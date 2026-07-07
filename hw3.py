@@ -194,33 +194,47 @@ np.random.seed(42)
 # print(notes)
 
 # EXERCISE 6
-bib_numbers = np.array([101, 102, 103, 104, 105, 106]) 
-times_5k = np.array([22.3, 25.1, 21.8, 26.4, 23.0, 24.7])
-bib_numbers_2 = np.array([107, 108]) 
-times_5k_2 = np.array([20.5, 27.9])
-bib_numbers = np.concatenate((bib_numbers, bib_numbers_2))
-times_5k = np.concatenate((times_5k, times_5k_2))
-# print(bib_numbers)
-# print(times_5k)
+# bib_numbers = np.array([101, 102, 103, 104, 105, 106]) 
+# times_5k = np.array([22.3, 25.1, 21.8, 26.4, 23.0, 24.7])
+# bib_numbers_2 = np.array([107, 108]) 
+# times_5k_2 = np.array([20.5, 27.9])
+# bib_numbers = np.concatenate((bib_numbers, bib_numbers_2))
+# times_5k = np.concatenate((times_5k, times_5k_2))
+# # print(bib_numbers)
+# # print(times_5k)
 
-suffled_index = np.random.permutation(len(bib_numbers.copy()))
-print(suffled_index)
+# suffled_index = np.random.permutation(len(bib_numbers.copy()))
+# print(suffled_index)
 
-new_bib_numbers = (bib_numbers[suffled_index]).copy()
-new_times_5k = (times_5k[suffled_index]).copy()
-# print(new_bib_numbers)
-# print(new_times_5k)
-# print(bib_numbers)
-# print(times_5k)
-rankings_index = np.argsort(times_5k.copy())
-print(rankings_index)
-sorted_people = ((bib_numbers.copy())[rankings_index]).reshape(8,1) 
-# from the most quick person to least quick one
-print(sorted_people)
-Ranks = (np.arange(1,len(bib_numbers) + 1)).reshape(8,1)
-My_table = np.concatenate((sorted_people, Ranks), axis = 1)
-print("-" * 50)
-print(My_table)
-# col0 = bib_num, col1 = rank
-bib_104_rank = My_table[My_table[:, 0] == 104][:, 1].item()
-print(f"bib 104 rank :  {bib_104_rank}")
+# new_bib_numbers = (bib_numbers[suffled_index]).copy()
+# new_times_5k = (times_5k[suffled_index]).copy()
+# # print(new_bib_numbers)
+# # print(new_times_5k)
+# # print(bib_numbers)
+# # print(times_5k)
+# rankings_index = np.argsort(times_5k.copy())
+# print(rankings_index)
+# sorted_people = ((bib_numbers.copy())[rankings_index]).reshape(8,1) 
+# # from the most quick person to least quick one
+# print(sorted_people)
+# Ranks = (np.arange(1,len(bib_numbers) + 1)).reshape(8,1)
+# My_table = np.concatenate((sorted_people, Ranks), axis = 1)
+# print("-" * 50)
+# print(My_table)
+# # col0 = bib_num, col1 = rank
+# bib_104_rank = My_table[My_table[:, 0] == 104][:, 1].item()
+# print(f"bib 104 rank :  {bib_104_rank}")
+
+# EXERCISE 7
+X_messages = np.array([ [12, 0, 1], [45, 5, 8], [8, 0, 0], [30, 3, 4] ]) 
+w = np.array([0.1, 0.8, 0.5]) 
+b = -2.0
+neuron_calculation = X_messages @ w + b
+print(neuron_calculation)
+
+correct_result = np.where(neuron_calculation >= 0, neuron_calculation, 0)
+print(correct_result)
+
+decision_level = 4.5
+print(np.where(correct_result < decision_level, "CALM", "ENERGETIC"))
+
